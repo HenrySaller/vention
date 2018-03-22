@@ -1,8 +1,9 @@
 import { h, render } from 'preact';
-
-import App from './App';
-
 import registerServiceWorker from './registerServiceWorker';
+import App from './App';
 
 render(<App />, document.getElementById('root'));
 registerServiceWorker();
+
+// Enables `react-devtools` in Preact projects.
+require('preact/debug');
