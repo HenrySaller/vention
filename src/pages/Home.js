@@ -1,9 +1,10 @@
 import { h, Component } from 'preact';
 import styled from 'styled-components';
 
-import Header from './header';
-import Footer from './footer';
-import Copyright from './copyright';
+import Header from '../components/Header';
+import Hero from '../components/Hero';
+import Footer from '../components/Footer';
+import Copyright from '../components/Copyright';
 
 const Body = styled.div`
   background-color: ${props => props.theme.color.grey50};
@@ -56,11 +57,9 @@ class Home extends Component {
   render() {
     return (
       <Body>
-        <header>
-          <Header />
-        </header>
+        <Header />
         <Main>
-          <p>To get started, edit <code>src/App.js</code> and save to reload.</p>
+          <Hero />
           <Box ref={el => this.parallaxBox = el} />
         </Main>
         <footer>

@@ -1,25 +1,23 @@
 import { h, Component } from 'preact';
 import { Link } from 'react-router-dom';
 
-import { footer as data } from './data';
+import { copyright as data } from '../data';
 
 import styled, { css } from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
 import Grid from 'styled-components-grid';
 
-import Wrapper from './styles/Wrapper';
+import Wrapper from '../helpers/Wrapper';
 
-// Mixins
 const textMixin = css`
   color: ${props => props.theme.color.blackDisabled};
   font-family: ${props => props.theme.font.main};
   font-size: 10px;
   line-height: 16px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.03em;
   margin: 12px 0;
 `;
 
-// Styled Components
 const Section = styled.section`
   background-color: ${props => props.theme.color.grey200};
 `;
@@ -56,16 +54,16 @@ const StyledLink = styled(Link)`
   }
 `;
 
-// Components
-const Links = (props) => (
-  <StyledLinks>
-    {props.urls.map((link) => (
-      <StyledLink to={link.path}>{link.title}</StyledLink>
-    ))}
-  </StyledLinks>
-);
+function Links(props) {
+  return (
+    <StyledLinks>
+      {props.urls.map((link) => (
+        <StyledLink to={link.path}>{link.title}</StyledLink>
+      ))}
+    </StyledLinks>
+  )
+};
 
-// Main Component
 class Copyright extends Component {
   render() {
     return (
@@ -76,7 +74,7 @@ class Copyright extends Component {
               <Description>© 2016 Vention  /  All rights reserved</Description>
             </Grid.Unit>
             <Grid.Unit size={{ medium: 1 / 2 }}>
-              <Links urls={data.copyright.urls} />
+              <Links urls={data.urls} />
             </Grid.Unit>
           </Grid>
         </Wrapper>

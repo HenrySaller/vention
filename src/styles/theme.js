@@ -38,9 +38,17 @@ export default {
   font: {
     main: 'Open Sans',
     title: 'Palanquin Dark',
+    icon: 'Material Icons',
   },
   size: {
-    wrapper: '70em',
-    header: '90em',
+    wrapperW: '70em',
+    headerW: '90em',
+    headerH: '80px',
+    navigationH: '64px',
+  },
+  spacing: {
+    0: '0',
+    1: '8px',
+    2: '16px',
   },
 };

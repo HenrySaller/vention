@@ -1,14 +1,13 @@
 import { h, Component } from 'preact';
 import { Link } from 'react-router-dom';
 
-import { footer as data } from './data';
+import { footer as data } from '../data';
 
 import styled, { css } from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
 import { grid } from 'styled-components-grid';
 
-
-import Wrapper from './styles/Wrapper';
+import Wrapper from '../helpers/Wrapper';
 
 // Styled Components
 const Section = styled.section`
@@ -50,7 +49,7 @@ const Title = styled.h5`
   font-weight: 500;
   font-size: 14px;
   line-height: 28px;
-  letter-spacing: 1px;
+  letter-spacing: 0.06em;
   margin: 0;
 `;
 
@@ -70,12 +69,16 @@ const StyledLink = styled(Link)`
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.03em;
   margin: 12px 0;
 
   display: block;
   text-decoration: none;
   cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 // Components

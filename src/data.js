@@ -2,18 +2,6 @@
 
 // Footer
 export const footer = {
-  copyright: {
-    urls: [
-      {
-        path: '/terms',
-        title: 'Terms of Use',
-      },
-      {
-        path: '/privacy',
-        title: 'Privacy Policy',
-      },
-    ],
-  },
   description: 'Vention enables mechanical designers to significantly reduce the development and manufacturing time of custom industrial equipment.\n\nMontreal (Quebec), Canada\ninfo@vention.io  /  1-888-901-5909',
   sections: [
     {
@@ -87,6 +75,20 @@ export const footer = {
           title: 'FAQs',
         },
       ],
+    },
+  ],
+};
+
+// Copyright
+export const copyright = {
+  urls: [
+    {
+      path: '/terms',
+      title: 'Terms of Use',
+    },
+    {
+      path: '/privacy',
+      title: 'Privacy Policy',
     },
   ],
 };

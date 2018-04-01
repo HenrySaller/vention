@@ -35,6 +35,8 @@
     "styled-components-grid": "^1.0.0-preview.15",
     "styled-normalize": "^4.0.0",
     "sw-precache-webpack-plugin": "^0.11.5",
+    "three": "^0.91.0",
+    "url-loader": "^1.0.1",
     "webpack": "3.8.1",
     "webpack-dev-server": "2.9.4",
     "webpack-manifest-plugin": "^2.0.0-rc.2",

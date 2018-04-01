@@ -5,8 +5,8 @@ import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 import './styles/global';
 
-import Home from './home';
-import NoMatch from './nomatch';
+import Home from './pages/Home';
+import NoMatch from './pages/NoMatch';
 
 class App extends Component {
   render() {
@@ -14,8 +14,8 @@ class App extends Component {
       <ThemeProvider theme={theme}>
         <Router>
           <Switch>
-            <Route exact path='/' component={Home}/>
-            <Route path='/:path' component={NoMatch}/>
+            <Route exact path="/" component={Home}/>
+            <Route path="/:path" component={NoMatch}/>
           </Switch>
         </Router>
       </ThemeProvider>
