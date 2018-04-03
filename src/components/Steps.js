@@ -11,6 +11,7 @@ import ScrollReveal from '../helpers/ScrollReveal';
 const Section = styled.section`
   background-color: ${props => props.theme.color.grey100};
   text-align: center;
+  overflow: hidden;
   padding: 80px 0;
 `;
 
@@ -161,7 +162,7 @@ function Box(props) {
       <BoxBg />
       <Icon
         icon={props.icon}
-        size="40px"
+        size={{xsmall: '24px', medium: '40px'}}
         color={props.color}
         border="4px"
         padding="12px" />
@@ -196,7 +197,6 @@ const Number = styled(ScrollAnimation)`
   user-select: none;
 
   will-change: opacity;
-  transition
 
   ${breakpoint('xsmall', 'medium')`
     display: none;

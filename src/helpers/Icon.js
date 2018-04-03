@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import styled, { css } from 'styled-components';
+import { map } from 'styled-components-breakpoint';
 
 const iconStyles = css`
   font-family: ${props => props.theme.font.icon};
@@ -18,7 +19,10 @@ const iconStyles = css`
 const MaterialIcon = styled.div`
   ${iconStyles}
 
-  font-size: ${props => props.size};
+  ${({size}) => map(size, val => val && css`
+    font-size: ${val};
+  `)}
+
   vertical-align: ${props => props.align || 'middle'};
   line-height: 1;
   user-select: none;
