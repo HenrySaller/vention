@@ -70,12 +70,15 @@ class Copyright extends Component {
       <Section>
         <Wrapper>
           <Grid>
+
             <Grid.Unit size={{ medium: 1 / 2 }}>
               <Description>© 2016 Vention  /  All rights reserved</Description>
             </Grid.Unit>
+
             <Grid.Unit size={{ medium: 1 / 2 }}>
               <Links urls={data.urls} />
             </Grid.Unit>
+            
           </Grid>
         </Wrapper>
       </Section>

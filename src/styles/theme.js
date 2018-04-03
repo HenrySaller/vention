@@ -51,4 +51,7 @@ export default {
     1: '8px',
     2: '16px',
   },
+  easing: {
+    easeExpoOut: 'cubic-bezier(0.19, 1, 0.22, 1)',
+  }
 };

@@ -22,6 +22,20 @@ const MaterialIcon = styled.div`
   vertical-align: ${props => props.align || 'middle'};
   line-height: 1;
   user-select: none;
+  box-sizing: border-box;
+
+  ${props => props.color && css`
+    color: ${props.color};
+  `}
+
+  ${props => props.padding && css`
+    padding: ${props.padding};
+  `}
+
+  ${props => props.border && props.color && css`
+    border: ${props.border} solid ${props.color};
+    border-radius: 50%;
+  `}
 `;
 
 MaterialIcon.defaultProps = {

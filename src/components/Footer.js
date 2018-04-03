@@ -97,6 +97,7 @@ class Footer extends Component {
     return (
       <Section>
         <FlexWrapper>
+
           <Group wide>
             <Title>About Vention</Title>
             <Description>
@@ -105,9 +106,11 @@ class Footer extends Component {
               })}
             </Description>
           </Group>
+          
           {data.sections.map((section) => (
             <Links data={section} />
           ))}
+
         </FlexWrapper>
       </Section>
     );

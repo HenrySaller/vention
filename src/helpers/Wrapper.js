@@ -4,7 +4,6 @@ import { map } from 'styled-components-breakpoint';
 const Wrapper = styled.div`
   max-width: ${props => props.theme.size.wrapperW};
   flex-basis: 100%;
-  width: 100%;
 
   ${({margin}) => map(margin, val => val && `
     margin: ${val};

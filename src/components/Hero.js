@@ -6,6 +6,7 @@ import breakpoint from 'styled-components-breakpoint';
 import Wrapper from '../helpers/Wrapper';
 import Button from '../helpers/Button';
 import Particles from '../helpers/Particles';
+import ScrollReveal from '../helpers/ScrollReveal';
 
 const Section = styled.section`
   background-color: ${props => props.theme.color.main};
@@ -28,17 +29,25 @@ const Title = styled.h1`
   font-size: 36px;
   line-height: 48px;
   letter-spacing: 0.06em;
-  margin: 0 0 16px 0;
+
+  margin: 0;
+  margin-bottom: 16px;
+
+  overflow: hidden;
 `;
 
-const Subtitle = styled.h3`
+const Subtitle = styled.h2`
   color: ${props => props.theme.color.white};
   font-family: ${props => props.theme.font.title};
   font-weight: 500;
   font-size: 24px;
   line-height: 36px;
   letter-spacing: 0.06em;
-  margin: 0 0 48px 0;
+
+  margin: 0;
+  margin-bottom: 48px;
+
+  overflow: hidden;
 `;
 
 const Description = styled.p`
@@ -47,9 +56,12 @@ const Description = styled.p`
   font-size: 14px;
   line-height: 24px;
   letter-spacing: 0.03em;
+
   margin: 0 auto;
   margin-bottom: 48px;
+
   max-width: 400px;
+  overflow: hidden;
 
   ${breakpoint('xsmall', 'medium')`
     display: none;
@@ -66,13 +78,48 @@ const buttonStyles = css`
 
 class Hero extends Component {
   render() {
+    const animationConfig = {
+      animateIn: 'active',
+      duration: 0.8,
+      animateOnce: true,
+    }
+
     return (
       <Section>
         <StyledWrapper>
-          <Title>Design your machine today. </Title>
-          <Subtitle>Get it shipped tomorrow.</Subtitle>
-          <Description>The only platform where you can design and build custom machine from a web-browser in just a few days.</Description>
-          <Button icon="play_circle_outline" iconPosition="before" iconSize="24px" overrides={buttonStyles}>Play Intro</Button>
+
+          <Title>
+            <ScrollReveal
+              {...animationConfig}
+              delay={200}>
+              Design your machine today.
+            </ScrollReveal>
+          </Title>
+
+          <Subtitle>
+            <ScrollReveal
+              {...animationConfig}
+              delay={400}>
+              Get it shipped tomorrow.
+            </ScrollReveal>
+          </Subtitle>
+
+          <Description>
+            <ScrollReveal
+              {...animationConfig}
+              delay={600}>
+              The only platform where you can design and build custom machine from a web-browser in just a few days.
+            </ScrollReveal>
+          </Description>
+
+          <Button
+            icon="play_circle_outline"
+            iconPosition="before"
+            iconSize="24px"
+            overrides={buttonStyles}>
+            Play Intro
+          </Button>
+          
         </StyledWrapper>
         <Particles />
       </Section>

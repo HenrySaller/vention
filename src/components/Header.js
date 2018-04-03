@@ -72,18 +72,21 @@ class Header extends Component {
         <Section>
           <Wrapper>
             <Grid>
+
               <Grid.Unit size={{ xsmall: 1/4, medium: 1/2 }}>
                 <Logo to="/">
                   <img src={logoIcon} alt="Vention Logo" />
                   <LogoTitle src={logoTitle} alt="Vention" />
                 </Logo>
               </Grid.Unit>
+
               <Grid.Unit size={{ xsmall: 3/4, medium: 1/2 }}>
                 <Actions>
                   <Button variation="secondary" type="border" margin="0 16px 0 0">Login</Button>
                   <Button variation="main" type="fill">Sign Up</Button>
                 </Actions>
               </Grid.Unit>
+              
             </Grid>
           </Wrapper>
         </Section>
