@@ -15,7 +15,7 @@ const Section = styled.section`
 const Title = styled.p`
   color: ${props => props.theme.color.blackDividers};
   font-family: ${props => props.theme.font.title};
-  font-weight: 500;
+  font-weight: 600;
   font-size: 80px;
   line-height: 1;
   letter-spacing: 0.01em;

@@ -214,7 +214,7 @@ module.exports = {
         {
           module: 'google-fonts',
           entry: {
-            path: 'https://fonts.googleapis.com/css?family=Open+Sans:400,700|Palanquin+Dark:400,600',
+            path: 'https://fonts.googleapis.com/css?family=Open+Sans:400,600|Palanquin+Dark:400,600',
             type: 'css',
           },
         },

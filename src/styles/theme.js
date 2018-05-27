@@ -3,7 +3,7 @@ export default {
     xlarge: 1280,
     large: 1024,
     medium: 769,
-    small: 375,
+    small: 426,
     xsmall: 0,
   },
   color: {
@@ -34,6 +34,8 @@ export default {
     grey700: '#616161',
     grey800: '#424242',
     grey900: '#212121',
+  // Other
+    scene: '#E7EBEE',
   },
   font: {
     main: 'Open Sans',
@@ -53,5 +55,6 @@ export default {
   },
   easing: {
     easeExpoOut: 'cubic-bezier(0.19, 1, 0.22, 1)',
+    easeCubicInOut: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
   }
 };

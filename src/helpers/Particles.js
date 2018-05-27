@@ -45,7 +45,7 @@ class Particles extends Component {
     this.width = window.innerWidth;
     this.height = 200;
 
-    this.camera = new PerspectiveCamera( 75, this.width / this.height, 1, 1500 );
+    this.camera = new PerspectiveCamera(75, this.width / this.height, 1, 1500);
     this.camera.position.z = 700;
     this.camera.position.x = 35;
     this.camera.position.y = 300;
@@ -129,6 +129,11 @@ class Particles extends Component {
   animate = () => {
     this.sceneRender();
     this.frameId = window.requestAnimationFrame(this.animate);
+
+    /* 30 FPS Alternative
+    setTimeout(() => {
+      this.frameId = window.requestAnimationFrame(this.animate);
+    }, 1000 / 30 ); */
   }
 
   startLoop = () =>  {

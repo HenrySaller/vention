@@ -9,7 +9,6 @@ import { grid } from 'styled-components-grid';
 
 import Wrapper from '../helpers/Wrapper';
 
-// Styled Components
 const Section = styled.section`
   background-color: ${props => props.theme.color.white};
 `;
@@ -46,7 +45,7 @@ const Group = styled.div`
 const Title = styled.h5`
   color: ${props => props.theme.color.blackPrimary};
   font-family: ${props => props.theme.font.title};
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
   line-height: 28px;
   letter-spacing: 0.06em;
@@ -67,7 +66,7 @@ const StyledLink = styled(Link)`
   color: ${props => props.theme.color.blackSecondary};
   font-family: ${props => props.theme.font.main};
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.03em;
   margin: 12px 0;
@@ -81,7 +80,6 @@ const StyledLink = styled(Link)`
   }
 `;
 
-// Components
 const Links = (props) => (
   <Group>
     <Title>{props.data.title}</Title>
@@ -91,7 +89,6 @@ const Links = (props) => (
   </Group>
 );
 
-// Main Component
 class Footer extends Component {
   render() {
     return (
@@ -106,7 +103,7 @@ class Footer extends Component {
               })}
             </Description>
           </Group>
-          
+
           {data.sections.map((section) => (
             <Links data={section} />
           ))}

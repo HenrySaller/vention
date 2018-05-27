@@ -9,7 +9,7 @@ import Grid from 'styled-components-grid';
 
 import Wrapper from '../helpers/Wrapper';
 
-const textMixin = css`
+const textStyles = css`
   color: ${props => props.theme.color.blackDisabled};
   font-family: ${props => props.theme.font.main};
   font-size: 10px;
@@ -23,8 +23,12 @@ const Section = styled.section`
 `;
 
 const Description = styled.p`
-  ${textMixin};
+  ${textStyles};
   text-align: center;
+
+  ${breakpoint('xsmall', 'medium')`
+    margin-bottom: 0;
+  `}
 
   ${breakpoint('medium')`
     text-align: left;
@@ -41,7 +45,7 @@ const StyledLinks = styled.p`
 `;
 
 const StyledLink = styled(Link)`
-  ${textMixin};
+  ${textStyles};
 
   display: inline-block;
   text-decoration: none;
@@ -78,7 +82,7 @@ class Copyright extends Component {
             <Grid.Unit size={{ medium: 1 / 2 }}>
               <Links urls={data.urls} />
             </Grid.Unit>
-            
+
           </Grid>
         </Wrapper>
       </Section>

@@ -1,5 +1,7 @@
 import { h, Component } from 'preact';
 
+import { steps as data } from '../data';
+
 import styled, { css, keyframes } from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
 import ScrollAnimation from 'react-animate-on-scroll';
@@ -7,18 +9,42 @@ import ScrollAnimation from 'react-animate-on-scroll';
 import Wrapper from '../helpers/Wrapper';
 import Icon from '../helpers/Icon';
 import ScrollReveal from '../helpers/ScrollReveal';
+import Animate from '../helpers/Animate';
 
 const Section = styled.section`
   background-color: ${props => props.theme.color.grey100};
   text-align: center;
-  overflow: hidden;
+  position: relative;
+  z-index: 2;
   padding: 80px 0;
+
+  ${breakpoint('medium')`
+    padding-bottom: 240px;
+  `}
+`;
+
+const BackgroundTop = styled.div`
+  background-color: ${props => props.theme.color.grey100};
+  position: absolute;
+  top: 0; right: 0; left: 0;
+  height: 50vh;
+  z-index: -1;
+
+  will-change: transform;
+
+  ${breakpoint('xsmall', 'medium')`
+    display: none;
+  `}
+
+  ${breakpoint('medium')`
+    transform: translateY(var(--ty));
+  `}
 `;
 
 const Title = styled.h2`
   color: ${props => props.theme.color.blackPrimary};
   font-family: ${props => props.theme.font.title};
-  font-weight: 500;
+  font-weight: 400;
   font-size: 24px;
   line-height: 36px;
   letter-spacing: 0.06em;
@@ -43,6 +69,38 @@ const Description = styled.p`
   overflow: hidden;
 `;
 
+const slideAnimationConfig = (props) => {
+  const config = {
+    from: -25,
+    to: 10,
+  }
+
+  const from = `${props.reverse ? -config.from : config.from}%`;
+  const to = `${props.reverse ? -config.to : config.to}%`;
+
+  return {from, to};
+}
+
+const slideAnimation = (props) => {
+  const config = slideAnimationConfig(props);
+
+  return keyframes`
+    from {
+      transform: translateX(${config.from});
+      opacity: 0;
+    }
+    to {
+      transform: translateX(${config.to});
+      opacity: 1;
+    }
+  `
+};
+
+const fadeInAnimation = keyframes`
+  from {opacity: 0;}
+  to {opacity: 1;}
+`;
+
 const StyledBox = styled(Box).attrs({
   color: props => props.theme.color.main,
 })`
@@ -59,9 +117,12 @@ const StyledBox = styled(Box).attrs({
   margin-top: 40px;
   width: 100%;
 
+  will-change: transform, opacity;
+
   &::before {
     display: block;
     content: '';
+    overflow: hidden;
 
     position: absolute;
     top: 0; right: 5%; bottom: 10%; left: 5%;
@@ -94,17 +155,34 @@ const StyledBox = styled(Box).attrs({
     transition: opacity 0.6s ${props => props.theme.easing.easeExpoOut};
   }
 
-  &:hover {
-    &::before {transform: scale(1.1);}
-    &::after {opacity: 0;}
-  }
+  ${breakpoint('xsmall', 'medium')`
+    &.active {
+      animation-name: ${fadeInAnimation};
+      animation-fill-mode: forwards;
+    }
+
+    border-radius: 24px;
+
+    &::after, &::before {
+      border-radius: 24px;
+    }
+  `}
 
   ${breakpoint('medium')`
     width: 65%;
+    transform: translateX(${
+      props => slideAnimationConfig({reverse: props.reverse}).from
+    });
 
-    will-change: transform;
-    transition: transform 0.1s linear;
-    transform: translateX(var(--tx));
+    &:hover {
+      &::before {transform: scale(1.1);}
+      &::after {opacity: 0;}
+    }
+
+    &.active {
+      animation-name: ${props => slideAnimation({reverse: props.reverse})};
+      animation-fill-mode: forwards;
+    }
   `}
 
   ${breakpoint('large')`
@@ -124,8 +202,13 @@ const BoxBg = styled.div`
   top: 0; right: 0; bottom: 0; left: 0;
   z-index: -1;
   border-radius: 60px;
+  will-change: transform;
 
   background-color: ${props => props.theme.color.white};
+
+  ${breakpoint('xsmall', 'medium')`
+  border-radius: 24px;
+  `}
 `;
 
 const BoxInfo = styled.div`
@@ -137,7 +220,7 @@ const BoxInfo = styled.div`
 const BoxTitle = styled.h3`
   color: ${props => props.theme.color.blackPrimary};
   font-family: ${props => props.theme.font.title};
-  font-weight: 500;
+  font-weight: 400;
   font-size: 20px;
   line-height: 32px;
   letter-spacing: 0.06em;
@@ -158,7 +241,11 @@ const BoxDescription = styled.p`
 
 function Box(props) {
   return (
-    <div className={props.className}>
+    <ScrollAnimation
+      className={props.className}
+      animateIn="active"
+      duration={0.8}
+      animateOnce={true}>
       <BoxBg />
       <Icon
         icon={props.icon}
@@ -167,7 +254,7 @@ function Box(props) {
         border="4px"
         padding="12px" />
       <BoxInfo>{props.children}</BoxInfo>
-    </div>
+    </ScrollAnimation>
   )
 }
 
@@ -190,12 +277,12 @@ const Number = styled(ScrollAnimation)`
 
   color: ${props => props.theme.color.grey200};
   font-family: ${props => props.theme.font.title};
-  font-weight: 700;
+  font-weight: 600;
   font-size: 540px;
   line-height: 320px;
 
   user-select: none;
-
+  opacity: 0;
   will-change: opacity;
 
   ${breakpoint('xsmall', 'medium')`
@@ -205,56 +292,21 @@ const Number = styled(ScrollAnimation)`
   ${breakpoint('medium')`
     &.active {
       animation-name: ${revealAnimation};
+      animation-fill-mode: forwards;
     }
   `}
 `;
 
 class Steps extends Component {
-  Animate = {
-    elements: [],
-    instances: [],
-    getAnimations: function() {
-      const list = [];
-      this.elements.forEach((el, i) => {
-        list.push({
-          box: el,
-        })
-      });
-      return list;
-    }
-  }
+  Animate = new Animate();
 
   componentDidMount() {
-    const animations = this.Animate.getAnimations();
-    const config = {
-      from: -25,
-      to: 10,
-    }
-
-    animations.forEach((ref) => {
-      const from = `${ref.box.props.reverse ? -config.from : config.from}%`;
-      const to = `${ref.box.props.reverse ? -config.to : config.to}%`;
-
-      this.Animate.instances.push(basicScroll.create({
-        elem: ref.box.base,
-        from: 'bottom-bottom',
-        to: 'top-middle',
-        direct: true,
-        props: {
-          '--tx': {
-            from,
-            to,
-            timing: 'expoOut',
-          },
-        },
-      }));
-    });
-
-    this.Animate.instances.forEach(instance => instance.start());
+    this.Animate.init();
+    this.Animate.start();
   }
 
   componentWillUnmount() {
-    this.Animate.instances.forEach(instance => instance.destroy());
+    this.Animate.destroy();
   }
 
   render() {
@@ -266,12 +318,24 @@ class Steps extends Component {
 
     return (
       <Section>
+        <BackgroundTop
+          ref={el => this.Animate.add(el, {
+            from: 'top-bottom',
+            to: 'middle-middle',
+            props: {
+              '--ty': {
+                from: 0,
+                to: '-100%',
+                timing: 'sineIn',
+              },
+            },
+          })} />
         <Wrapper>
 
           <Title>
             <ScrollReveal
               {...revealConfig}
-              delay={200}>
+              delay={0}>
               Design and Build in Minutes
             </ScrollReveal>
           </Title>
@@ -279,72 +343,31 @@ class Steps extends Component {
           <Description>
             <ScrollReveal
               {...revealConfig}
-              delay={400}>
-              A single hardware and software environment to select parts, design, order and assemble industrial equipement and prototypes.
+              delay={200}>
+              {
+                `A single hardware and software environment to select ` +
+                `parts, design, order and assemble industrial equipement ` +
+                `and prototypes.`
+              }
             </ScrollReveal>
           </Description>
 
-          <BoxWrapper>
-            <Number
-              {...revealConfig}
-              align="left"
-              position="-80%, -60%">
-              1
-            </Number>
-            <StyledBox
-              icon="create"
-              reverse
-              ref={el => this.Animate.elements.push(el)}>
-              <BoxTitle>Design</BoxTitle>
-              <BoxDescription>Create an assembly in your browser using Vention’s library of industrial modular parts.</BoxDescription>
-            </StyledBox>
-          </BoxWrapper>
-
-          <BoxWrapper>
-            <Number
-              {...revealConfig}
-              align="right"
-              position="20%, -80%">
-              2
-            </Number>
-            <StyledBox
-              icon="shopping_cart"
-              ref={el => this.Animate.elements.push(el)}>
-              <BoxTitle>Order</BoxTitle>
-              <BoxDescription>Review your Assembly’s bill of material and order all the parts directly from Vention’s website.</BoxDescription>
-            </StyledBox>
-          </BoxWrapper>
-
-          <BoxWrapper>
-            <Number
-              {...revealConfig}
-              align="left"
-              position="0, -40%">
-              3
-            </Number>
-            <StyledBox
-              icon="build"
-              reverse
-              ref={el => this.Animate.elements.push(el)}>
-              <BoxTitle>Assemble</BoxTitle>
-              <BoxDescription>Receive your flat-pack box and start assembling your design as you would for IKEA furniture.</BoxDescription>
-            </StyledBox>
-          </BoxWrapper>
-
-          <BoxWrapper>
-            <Number
-              {...revealConfig}
-              align="right"
-              position="60%, -70%">
-              4
-            </Number>
-            <StyledBox
-              icon="publish"
-              ref={el => this.Animate.elements.push(el)}>
-              <BoxTitle>Publish</BoxTitle>
-              <BoxDescription>Opt to publish your design privately or publicly.</BoxDescription>
-            </StyledBox>
-          </BoxWrapper>
+          {data.map((step) => (
+            <BoxWrapper>
+              <Number
+                {...revealConfig}
+                align={step.number.align}
+                position={step.number.position}>
+                {step.number.content}
+              </Number>
+              <StyledBox
+                icon={step.icon}
+                reverse={step.reverse}>
+                <BoxTitle>{step.title}</BoxTitle>
+                <BoxDescription>{step.description}</BoxDescription>
+              </StyledBox>
+            </BoxWrapper>
+          ))}
 
         </Wrapper>
       </Section>

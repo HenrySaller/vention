@@ -15,6 +15,7 @@ const Section = styled.section`
   align-items: center;
   text-align: center;
   position: relative;
+  z-index: 1;
 `;
 
 const StyledWrapper = styled(Wrapper)`
@@ -25,7 +26,7 @@ const StyledWrapper = styled(Wrapper)`
 const Title = styled.h1`
   color: ${props => props.theme.color.white};
   font-family: ${props => props.theme.font.title};
-  font-weight: 500;
+  font-weight: 600;
   font-size: 36px;
   line-height: 48px;
   letter-spacing: 0.06em;
@@ -39,7 +40,7 @@ const Title = styled.h1`
 const Subtitle = styled.h2`
   color: ${props => props.theme.color.white};
   font-family: ${props => props.theme.font.title};
-  font-weight: 500;
+  font-weight: 400;
   font-size: 24px;
   line-height: 36px;
   letter-spacing: 0.06em;
@@ -72,7 +73,7 @@ const buttonStyles = css`
   background-color: ${props => props.theme.color.white};
   color: ${props => props.theme.color.main};
   padding: 10px 14px 10px 10px;
-  border-radius: 21px;
+  border-radius: 24px;
   box-shadow: 0 8px 8px ${props => props.theme.color.blackDividers};
 `;
 
@@ -108,7 +109,10 @@ class Hero extends Component {
             <ScrollReveal
               {...animationConfig}
               delay={600}>
-              The only platform where you can design and build custom machine from a web-browser in just a few days.
+              {
+                `The only platform where you can design and build custom ` +
+                `machine from a web-browser in just a few days.`
+              }
             </ScrollReveal>
           </Description>
 
@@ -119,7 +123,7 @@ class Hero extends Component {
             overrides={buttonStyles}>
             Play Intro
           </Button>
-          
+
         </StyledWrapper>
         <Particles />
       </Section>

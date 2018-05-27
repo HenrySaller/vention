@@ -9,13 +9,19 @@ const StyledButton = styled.button`
   user-select: none;
   font-size: 0;
 
-  border-radius: 16px;
+  border-radius: 18px;
   border-style: solid;
   border-width: 2px;
-  border-color: ${props => props.type === 'border' ? props.config.color : 'transparent'};
+  border-color: ${props => {
+    return props.shape === 'border' ? props.config.color : 'transparent'
+  }};
 
-  color: ${props => props.type !== 'fill' ? props.config.color : props.theme.color.white };
-  background-color: ${props => props.type === 'fill' ? props.config.color : 'transparent' };
+  color: ${props => {
+    return props.shape !== 'fill' ? props.config.color : props.theme.color.white
+  }};
+  background-color: ${props => {
+    return props.shape === 'fill' ? props.config.color : 'transparent'
+  }};
 
   padding: ${props => props.config.padding};
   margin: ${props => props.config.margin || 0};
@@ -24,9 +30,10 @@ const StyledButton = styled.button`
 `;
 
 const Text = styled.span`
+  appearance: none;
   font-family: ${props => props.theme.font.title};
   font-size: ${props => props.fontSize || '14px'};
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.3;
   letter-spacing: 0.06em;
   vertical-align: middle;
@@ -44,15 +51,15 @@ class Button extends Component {
 
     config.hasIcon = config.iconBefore || config.iconAfter;
     config.margin = this.props.margin;
-    config.padding = this.props.padding ||
+    config.padding = this.props.padding || (
         config.isIcon     ? '5px'
       : !config.hasIcon   ? '5px 14px'
       : config.iconBefore ? '5px 14px 5px 5px'
-                          : '5px 5px 5px 14px';
+                          : '5px 5px 5px 14px');
 
     const iconConfig = {
       icon: this.props.icon,
-      size: this.props.iconSize || config.isIcon ? '18px' : '16px',
+      size: this.props.iconSize || (config.isIcon ? '18px' : '16px'),
     }
 
     return (
