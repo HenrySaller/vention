@@ -10,14 +10,19 @@ const StyledInput = styled.input`
   box-sizing: border-box;
   background-color: transparent;
   box-shadow: none;
-  border: none;
-  margin: none;
+
+  margin: 0;
+  padding: 0;
   min-width: 0;
 
-  font-family: ${props => props.theme.font.main};
+  border-style: solid;
+  border-width: 0;
+  border-bottom-width: 2px;
+
+  font-family: ${props => props.theme.font.title};
   font-weight: 400;
-  font-size: 18px;
-  line-height: 32px;
+  font-size: 14px;
+  line-height: 30px;
   letter-spacing: 0.06em;
 
   ${props => props.overrides /* optional style overrides */}

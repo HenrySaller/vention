@@ -38,10 +38,7 @@ const Form = styled.form`
 `;
 
 const inputStyles = css`
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: ${props => props.theme.color.white};
-
+  border-color: ${props => props.theme.color.white};
   color: ${props => props.theme.color.white};
 
   margin-right: 40px;
@@ -88,7 +85,7 @@ class Newsletter extends Component {
                   type="email"
                   name="email"
                   required
-                  placeholder="email address"
+                  placeholder="Your Email"
                   overrides={inputStyles} />
                 <Button
                   type="submit"
