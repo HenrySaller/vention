@@ -30,5 +30,5 @@ Vendor animation libraries.
 
 This project uses some features that are not widely supported. Please use modern browser while viewing the demo.
 
-Demo - [View](http://dev-vention.herokuapp.com/)
-Case Study - [Read](https://henrysaller.com/project/vention/)
+* Demo - [View =>](http://dev-vention.herokuapp.com/)
+* Case Study - [Read =>](https://henrysaller.com/project/vention/)
